@@ -13,13 +13,10 @@
     
     <ItemGroup>
         <PackageReference Include="PEAKModding.PEAKLib.Core" Version="*"/>
-        
+        <PackageReference Include="PEAKModding.PEAKLib.Items" Version="*"/>
         <PackageReference Update="Hamunii.BepInEx.AutoPlugin" Version="*"/>
     </ItemGroup>
     
-    <ItemGroup>
-        <PackageReference Include="PEAKModding.PEAKLib.Items" Version="*"/>
-    </ItemGroup>
     
     <!--
     How to include thunderstore mods as dependencies via nuget
