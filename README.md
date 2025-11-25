@@ -1,6 +1,6 @@
 # CanadianCuisine
 
-Adds canadian foods and snacks fatefully rendered in the PEAK style.
+Adds French-Canadian dishes and snacks fatefully rendered within PEAK's art style.
 
 ## Food List ##
 
@@ -17,9 +17,9 @@ Location
 Tags
 : Packaged food
 
-A small chocolate caked with a cream filling, all covered in chocolate.
+A small chocolate covered chocolate caked with a cream filling.
 
-- Essentially two uses of scout cookies in one.
+- Essentially two uses of scout cookies combined in one.
 
 ### Host Cuttings ###
 
@@ -36,7 +36,7 @@ Tags
 
 Cuttings of communion wafers, which are made of flour and water.
 
-- Not very nutritious, but widespread and abundant.
+- Not very nutritious, but relatively common and abundant.
 - Has 6 total uses.
 
 ### Maple Cookies ###
@@ -52,9 +52,9 @@ Location
 Tags
 : Packaged food
 
-Cookies shaped like maple leaves that have a maple-flavored cream filling.
+Maple leaf shaped cookies with a maple cream filling.
 
-- 4 mini lollipops with half the drowsiness.
+- 4 mini lollipops at half the drowsiness.
 
 ### Paw Cakes ###
 
@@ -105,7 +105,6 @@ Location
 Tags
 : Packaged food
 
-
 The classic fries, gravy and cheese combo.
 
 - Shareable airplane food (2 uses).
@@ -123,8 +122,7 @@ Location
 Tags
 : Packaged food
 
-
-A very hearthy meat pie that is usually eaten during the holidays. 
+A very hearty meat pie, usually eaten during the holidays.
 
 - 1/4 of an airplane food.
 - Has 4 total uses.
@@ -147,3 +145,9 @@ Small (usually) blue berries, found in bushes and along thorny vines.
 
 - 3 uses berries;
 - 3 variants: one poisonous (which can be cooked off), one normal and one giving extra stamina.
+
+# Item Suggestions #
+
+If you have suggestions for new items, please [open an issue on the GitHub repository here](https://github.com/MiiMii1205/CanadianCuisine/issues/new).
+
+Please note that this mod has a rather specific theme, so keep that in mind before publishing!
