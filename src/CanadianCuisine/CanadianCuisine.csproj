@@ -8,13 +8,19 @@
         <!-- This is the display name of your mod. Example: BepInEx Template -->
         <AssemblyTitle>CanadianCuisine</AssemblyTitle>
         <!-- This is the version number of your mod. -->
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
     </PropertyGroup>
     
     <ItemGroup>
         <PackageReference Include="PEAKModding.PEAKLib.Core" Version="*"/>
         <PackageReference Include="PEAKModding.PEAKLib.Items" Version="*"/>
         <PackageReference Update="Hamunii.BepInEx.AutoPlugin" Version="*"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Update="thunderstore.toml">
+        <DependentUpon>Plugin.cs</DependentUpon>
+      </None>
     </ItemGroup>
     
     
