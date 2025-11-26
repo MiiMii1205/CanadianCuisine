@@ -5,3 +5,9 @@
 ### Version 1.0.0
 
 - Initial release
+- 
+## [1.0.1] - 2025-11-24
+
+### Version 1.0.1
+
+- Minor README.md and localization texts changes
