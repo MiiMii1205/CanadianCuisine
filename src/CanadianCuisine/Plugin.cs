@@ -33,6 +33,8 @@ public partial class Plugin : BaseUnityPlugin
 
             var itCook = prefab.AddComponent<ItemCooking>();
 
+            itCook.ignoreDefaultCookBehavior = true;
+
             itCook.additionalCookingBehaviors =
             [
                 new CookingBehaviorChangeFeedbackSfx()
@@ -55,15 +57,29 @@ public partial class Plugin : BaseUnityPlugin
                     cookedAmountToTrigger = 3,
                     scriptsToEnable = [prefab.GetComponent<Action_ApplyAffliction>()]
                 },
+                new CookingBehavior_EnableScripts()
+                {
+                    cookedAmountToTrigger = 3,
+                    scriptsToEnable = [prefab.GetComponent<Action_GiveExtraStamina>()]
+                },
                 new CookingBehaviorChangeFeedbackSfx()
                 {
                     cookedAmountToTrigger = 4,
                     soundEffectNameToChangeTo = "SFXI Heal Hunger Normal"
+                },
+                new CookingBehavior_DisableScripts()
+                {
+                    cookedAmountToTrigger = 4,
+                    scriptsToDisable = [prefab.GetComponent<Action_GiveExtraStamina>(),
+                        prefab.GetComponent<Action_ApplyAffliction>()
+                    ]
                 }
             ];
 
             peakBundle.Mod.RegisterContent();
+            
         });
+        
         Log.LogInfo("Snacks items are loaded!");
 
         this.LoadBundleAndContentsWithName("canadianfruits.peakbundle");

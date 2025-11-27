@@ -11,13 +11,14 @@ public class CookingBehaviorChangeFeedbackSfx : AdditionalCookingBehavior
             Plugin.Log.LogWarning("Cooking Behaviour will try to change to an empty sound effect name.");
         }
     }
+
     public override void TriggerBehaviour(int cookedAmount)
     {
         var uses = itemCooking.item.gameObject.GetComponents<ItemUseFeedback>();
-        
+
         ItemUseFeedback? mainFeedback = itemCooking.item._useFeedback;
         ItemUseFeedback? nextFeedback = null;
-        
+
         foreach (var itemUseFeedback in uses)
         {
             if (itemUseFeedback != mainFeedback && itemUseFeedback.sfxUsed.name == soundEffectNameToChangeTo)
@@ -29,8 +30,7 @@ public class CookingBehaviorChangeFeedbackSfx : AdditionalCookingBehavior
         if (nextFeedback != null && mainFeedback != null)
         {
             mainFeedback.sfxUsed = nextFeedback.sfxUsed;
-            
+            Plugin.Log.LogDebug($"Changed Feedback SFX to \"{soundEffectNameToChangeTo}\"");
         }
-        
     }
 }
