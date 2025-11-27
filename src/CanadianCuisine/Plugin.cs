@@ -2,6 +2,8 @@
 using System.IO;
 using BepInEx;
 using BepInEx.Logging;
+using CanadianCuisine.controllers;
+using HarmonyLib;
 using PEAKLib.Core;
 using PEAKLib.Items;
 using PEAKLib.Items.UnityEditor;
@@ -26,7 +28,35 @@ public partial class Plugin : BaseUnityPlugin
         
         Log.LogInfo($"Plugin {Name} is loading...");
         
-        this.LoadBundleAndContentsWithName("canadiansnacks.peakbundle");
+        this.LoadBundleWithName("canadiansnacks.peakbundle", peakBundle =>
+        {
+            var prefab = peakBundle.LoadAsset<GameObject>("HostCuttings.prefab");
+
+            var itCook = prefab.AddComponent<ItemCooking>();
+
+            itCook.preCooked = 0;
+
+            itCook.additionalCookingBehaviors =
+            [
+                new CookingBehavior_ChangeFeedbackSFX()
+                {
+                    cookedAmountToTrigger = 1
+                },
+                new CookingBehavior_EnableScripts()
+                {
+                    cookedAmountToTrigger = 1,
+                    scriptsToEnable = [prefab.GetComponent<Action_GiveExtraStamina>()]
+                },
+                new CookingBehavior_EnableScripts()
+                {
+                    cookedAmountToTrigger = 3,
+                    scriptsToEnable = [prefab.GetComponent<Action_ApplyAffliction>()]
+                }
+            ];
+            
+            peakBundle.Mod.RegisterContent();
+
+        } );
         Log.LogInfo("Snacks items are loaded!");
         
         this.LoadBundleAndContentsWithName("canadianfruits.peakbundle");
