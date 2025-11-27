@@ -38,6 +38,7 @@ Cuttings of communion wafers, which are made of flour and water.
 
 - Not very nutritious, but relatively common and abundant.
 - Has 6 total uses.
+- We suggest cooking it...
 
 ### Maple Cookies ###
 
@@ -127,6 +128,26 @@ A very hearty meat pie, usually eaten during the holidays.
 - 1/4 of an airplane food.
 - Has 4 total uses.
 - Removes 10 cold points when eaten.
+
+### Papino Cookies ###
+
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PapinoCookies.png?raw=true" height="256" width="256"/>
+
+Rarity
+: Mythic
+
+Location
+: Ancient Luggage, Ancient Statue
+
+Tags
+: Packaged food, Mystical
+
+A legendary yet so simple cookie. So light and soft, you'll feel like you've reached heaven.
+
+- Gives "wind walk" for 15 seconds (low gravity).
+- Has 4 total uses.
+- You might want to hold on to it very tightly...
+- ... but cooking it might help you a bit!
 
 ### Bub Berry ###
 
