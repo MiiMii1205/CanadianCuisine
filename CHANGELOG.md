@@ -17,3 +17,11 @@
 ### Version 1.0.2
 
 - Fixed icon typo
+
+## [1.1.0] - 2025-11-26
+
+### Version 1.1.0
+
+- Added papino cookies
+- Tweaked the Host Cuttings cooking mechanic a bit
+- Fixed oversight with the big joes wrapper material
