@@ -18,11 +18,12 @@
 
 - Fixed icon typo
 
-## [1.1.0] - 2025-11-26
+## [1.1.1] - 2025-11-27
 
-### Version 1.1.0
+### Version 1.1.1
 
-- Added papino cookies
+- Added Papino Cookies, a Mystical Cookie box with levitating powers!
 - Tweaked the Host Cuttings cooking mechanic a bit
 - Fixed oversight with the big joes wrapper material
-- Fixed a bug with Host Cuttings SFX
+- Added better SFX for host cuttings, especially after cooking
+- Nerfed Maple Cookies by making them slightly shorter than lollipops + upgrading their rarity

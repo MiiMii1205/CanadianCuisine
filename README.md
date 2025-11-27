@@ -45,7 +45,7 @@ Cuttings of communion wafers, which are made of flour and water.
 <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/MapleCookies.png?raw=true" height="256" width="256"/>
 
 Rarity
-: Legendary
+: Mythic
 
 Location
 : Any luggage
