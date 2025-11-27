@@ -25,3 +25,4 @@
 - Added papino cookies
 - Tweaked the Host Cuttings cooking mechanic a bit
 - Fixed oversight with the big joes wrapper material
+- Fixed a bug with Host Cuttings SFX
