@@ -5,7 +5,7 @@
 ### Version 1.0.0
 
 - Initial release
-- 
+
 ## [1.0.1] - 2025-11-24
 
 ### Version 1.0.1
@@ -39,3 +39,9 @@
 - Reduced the amount of hunger restored of every bub berries by 15%;
 - Set White Bub Berries poison stat to about 95% of Green Crispberries;
 - Set extra stamina gained with purple bub berries to 85% of Yellow Crispberries;
+
+## [1.1.2] - 2025-11-27
+
+### Version 1.1.2
+
+- Fixed a bug with the tourtiere spawning inside the luggage
