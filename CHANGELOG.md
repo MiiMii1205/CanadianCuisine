@@ -32,6 +32,7 @@
 
 ### Version 1.1.2
 
+- Fixed a ton of logic issues with item cooking.
 - Nerfed Poor Man's Pudding and Maple Cookies again:
   - Changed the Infinite Stamina effect to be more in line with the lollipop;
 - Reduced the amount of hunger restored of Maple Cookies and Papino Cookies by 15%;
