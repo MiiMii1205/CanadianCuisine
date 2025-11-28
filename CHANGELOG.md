@@ -27,3 +27,14 @@
 - Fixed oversight with the big joes wrapper material
 - Added better SFX for host cuttings, especially after cooking
 - Nerfed Maple Cookies by making them slightly shorter than lollipops + upgrading their rarity
+
+## [1.1.2] - 2025-11-27
+
+### Version 1.1.2
+
+- Nerfed Poor Man's Pudding and Maple Cookies again:
+  - Changed the Infinite Stamina effect to be more in line with the lollipop;
+- Reduced the amount of hunger restored of Maple Cookies and Papino Cookies by 15%;
+- Reduced the amount of hunger restored of every bub berries by 15%;
+- Set White Bub Berries poison stat to about 95% of Green Crispberries;
+- Set extra stamina gained with purple bub berries to 85% of Yellow Crispberries;
