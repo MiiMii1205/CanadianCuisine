@@ -45,3 +45,11 @@
 ### Version 1.1.3
 
 - Fixed a bug with the tourtiere spawning inside the luggage
+
+## [1.2.0] - 2025-11-28
+
+### Version 1.2.0
+
+- Added Maple Taffy, a weaker but more common version of lollipops!
+- Minor bugfixes and small tweaks.
+
