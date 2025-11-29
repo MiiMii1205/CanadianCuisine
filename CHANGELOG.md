@@ -40,8 +40,8 @@
 - Set White Bub Berries poison stat to about 95% of Green Crispberries;
 - Set extra stamina gained with purple bub berries to 85% of Yellow Crispberries;
 
-## [1.1.2] - 2025-11-27
+## [1.1.3] - 2025-11-27
 
-### Version 1.1.2
+### Version 1.1.3
 
 - Fixed a bug with the tourtiere spawning inside the luggage
