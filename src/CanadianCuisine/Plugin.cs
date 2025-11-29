@@ -75,6 +75,12 @@ public partial class Plugin : BaseUnityPlugin
                     ]
                 }
             ];
+            
+            /*
+            
+            var toffee = peakBundle.LoadAsset<GameObject>("MapleToffee.prefab");
+            
+            toffee.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.AddComponent<MapleToffeeVariantController>();*/
 
             peakBundle.Mod.RegisterContent();
             
