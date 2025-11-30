@@ -19,6 +19,26 @@ public partial class Plugin : BaseUnityPlugin
 {
     internal static ManualLogSource Log { get; private set; } = null!;
 
+    private void FixColorblindMaterials(GameObject go)
+    {
+        var col = go.GetComponentInChildren<ColorblindVariant>();
+        
+        var probableShader = Shader.Find(col.colorblindMaterial.shader.name);
+
+
+        if (probableShader == null)
+        {
+            Log.LogWarning(
+                $": Shader {col.colorblindMaterial.shader.name} was not found."
+            );
+        }
+        else
+        {
+            col.colorblindMaterial.shader = probableShader;
+        }
+        
+    }
+
     private void Awake()
     {
         Log = Logger;
@@ -70,25 +90,94 @@ public partial class Plugin : BaseUnityPlugin
                 new CookingBehavior_DisableScripts()
                 {
                     cookedAmountToTrigger = 4,
-                    scriptsToDisable = [prefab.GetComponent<Action_GiveExtraStamina>(),
+                    scriptsToDisable =
+                    [
+                        prefab.GetComponent<Action_GiveExtraStamina>(),
                         prefab.GetComponent<Action_ApplyAffliction>()
                     ]
                 }
             ];
             
             /*
-            
+
             var toffee = peakBundle.LoadAsset<GameObject>("MapleToffee.prefab");
-            
+
             toffee.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.AddComponent<MapleToffeeVariantController>();*/
 
             peakBundle.Mod.RegisterContent();
-            
         });
-        
+
         Log.LogInfo("Snacks items are loaded!");
 
-        this.LoadBundleAndContentsWithName("canadianfruits.peakbundle");
+        this.LoadBundleWithName("canadianfruits.peakbundle", peakBundle =>
+        {
+            // Fix bubberries leaf shaders. GD/FoliageGD is left behind by PEAKLib, so we'll do it manually for now
+
+            var leafShade = Shader.Find("GD/FoliageGD");
+
+            if (leafShade == null)
+            {
+                Log.LogWarning(
+                    $": Shader GD/FoliageGD was not found."
+                );
+            }
+            else
+            {
+                var allBubP = new List<GameObject>
+                {
+                    peakBundle.LoadAsset<GameObject>("Bub Berry Blue.prefab"),
+                    peakBundle.LoadAsset<GameObject>("Bub Berry Purple.prefab"),
+                    peakBundle.LoadAsset<GameObject>("Bub Berry White.prefab")
+                };
+                
+                foreach (var bub in allBubP)
+                {
+                    // Also fix colorblinds material while we're at it...
+                    FixColorblindMaterials(bub);
+                    
+                    foreach (Renderer renderer in bub.GetComponentsInChildren<Renderer>())
+                    {
+                        foreach (Material mat in renderer.sharedMaterials)
+                        {
+                            
+                            if (mat.shader.name != leafShade.name)
+                            {
+                                continue;
+                            }
+
+                            // Replace dummy shader
+                            mat.shader = leafShade;
+
+                            mat.EnableKeyword("_ALPHATEST_ON");
+                            mat.EnableKeyword("_TRIPLANAR1_TOPDOWN");
+                            mat.EnableKeyword("_TRIPLANAR2_TRIPLANAR");
+                            mat.EnableKeyword("_TRIPLANAR3_UV");
+                            mat.EnableKeyword("_USESIMPLEMASK_ON");
+                        }
+                        
+                        foreach (Material mat in renderer.materials)
+                        {
+                            if (mat.shader.name != leafShade.name)
+                            {
+                                continue;
+                            }
+
+                            // Replace dummy shader
+                            mat.shader = leafShade;
+
+                            mat.EnableKeyword("_ALPHATEST_ON");
+                            mat.EnableKeyword("_TRIPLANAR1_TOPDOWN");
+                            mat.EnableKeyword("_TRIPLANAR2_TRIPLANAR");
+                            mat.EnableKeyword("_TRIPLANAR3_UV");
+                            mat.EnableKeyword("_USESIMPLEMASK_ON");
+                        }
+                    }
+                    
+                }
+            }
+
+            peakBundle.Mod.RegisterContent();
+        });
         Log.LogInfo("Fruits items are loaded!");
 
         Log.LogInfo($"Plugin {Name} is loaded!");

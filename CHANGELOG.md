@@ -53,3 +53,11 @@
 - Added Maple Taffy, a weaker but more common version of lollipops!
 - Minor bugfixes and small tweaks.
 
+
+## [1.2.1] - 2025-11-29
+
+### Version 1.2.1
+
+- Minor rendering fixes
+- Fixed bubberries colorblind variants materials
+
