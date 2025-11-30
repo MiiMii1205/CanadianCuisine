@@ -54,10 +54,11 @@
 - Minor bugfixes and small tweaks.
 
 
-## [1.2.1] - 2025-11-29
+## [1.2.1] - 2025-11-30
 
 ### Version 1.2.1
 
 - Minor rendering fixes
 - Fixed bubberries colorblind variants materials
+- Fixed blue bubberries bug where they don't get fully consumed at all after using  
 
