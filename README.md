@@ -40,6 +40,23 @@ Cuttings of communion wafers, which are made of flour and water.
 - Has 6 total uses.
 - We suggest cooking it...
 
+### Coffee Bar ###
+
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/CoffeeBar.png?raw=true" height="256" width="256"/>
+
+Rarity
+: Uncommon
+
+Location
+: Any luggage
+
+Tags
+: Packaged food
+
+A chunky coffee infused chocolate bar.
+
+- A lesser but more common energy drink.
+
 ### Maple Cookies ###
 
 <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/MapleCookies.png?raw=true" height="256" width="256"/>
