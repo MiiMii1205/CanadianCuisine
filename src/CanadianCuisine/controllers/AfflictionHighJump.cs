@@ -1,4 +1,5 @@
-﻿using Peak.Afflictions;
+﻿using CanadianCuisine.data;
+using Peak.Afflictions;
 using UnityEngine;
 using Zorro.Core.Serizalization;
 
@@ -33,8 +34,7 @@ public class AfflictionHighJump : Affliction
     
     public override AfflictionType GetAfflictionType()
     {
-        // TODO: Check how we can patch enums to add affliction types
-        return CuisineAfflictionManager.TypeByName("HighJump");
+        return CuisineAfflictionManager.TypeByName(CuisineAfflictionValues.HIGH_JUMP_NAME);
     }
 
     public override void Stack(Affliction incomingAffliction)

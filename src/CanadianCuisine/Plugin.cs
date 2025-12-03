@@ -207,7 +207,7 @@ public partial class Plugin : BaseUnityPlugin
     {
         CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
         {
-            Name = "HighJump"
+            Name = CuisineAfflictionValues.HIGH_JUMP_NAME
         }, ModDefinition.GetOrCreate(Info));
     }
 
