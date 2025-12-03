@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using BepInEx;
 using BepInEx.Logging;
 using CanadianCuisine.controllers;
+using CanadianCuisine.data;
 using HarmonyLib;
+using MonoDetour;
+using MonoDetour.HookGen;
 using PEAKLib.Core;
 using PEAKLib.Items;
 using PEAKLib.Items.UnityEditor;
@@ -37,6 +41,15 @@ public partial class Plugin : BaseUnityPlugin
             col.colorblindMaterial.shader = probableShader;
         }
         
+    }
+
+    private void OnDestroy()
+    {
+        DefaultMonoDetourManager.Instance.Dispose();
+        
+        Harmony.UnpatchID(Id);
+        
+        Log.LogInfo($"Plugin {Name} unloaded!");
     }
 
     private void Awake()
@@ -97,6 +110,7 @@ public partial class Plugin : BaseUnityPlugin
                     ]
                 }
             ];
+
             
             /*
 
@@ -180,7 +194,21 @@ public partial class Plugin : BaseUnityPlugin
         });
         Log.LogInfo("Fruits items are loaded!");
 
+        LoadAllCustomAfflictions();
+
+
+        MonoDetourManager.InvokeHookInitializers(typeof(Plugin).Assembly);
+        new Harmony(Id).PatchAll(typeof(CuisineCharacterPatcher));
+        
         Log.LogInfo($"Plugin {Name} is loaded!");
+    }
+
+    private void LoadAllCustomAfflictions()
+    {
+        CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
+        {
+            Name = "HighJump"
+        }, ModDefinition.GetOrCreate(Info));
     }
 
     private void AddLocalizedTextCsv()
