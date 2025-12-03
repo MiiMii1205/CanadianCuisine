@@ -159,7 +159,7 @@ Location
 Tags
 : Packaged food
 
-A sweat maple treat on a wooden stick. 
+A sweet maple treat on a wooden stick. 
 
 - Essentially a lesser lollipop, but a bit more common.
 
