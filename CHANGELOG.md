@@ -53,7 +53,6 @@
 - Added Maple Taffy, a weaker but more common version of lollipops!
 - Minor bugfixes and small tweaks.
 
-
 ## [1.2.1] - 2025-11-30
 
 ### Version 1.2.1
@@ -62,3 +61,8 @@
 - Fixed bubberries colorblind variants materials
 - Fixed blue bubberries bug where they don't get fully consumed at all after using  
 
+## [1.2.1] - 2025-12-02
+
+### Version 1.3.1
+
+- Added the Coffee Chocolate Bar, a weaker but more common version of energy drinks!
