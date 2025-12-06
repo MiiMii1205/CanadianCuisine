@@ -1,4 +1,5 @@
-﻿using Peak.Afflictions;
+﻿using CanadianCuisine.data;
+using Peak.Afflictions;
 using Photon.Pun;
 
 namespace CanadianCuisine.controllers;
@@ -18,12 +19,12 @@ public class CuisineAfflictionCharacter : MonoBehaviourPunCallbacks
         m_characterMovement = character.GetComponent<CharacterMovement>();
         _originalJumpImpulse = m_characterMovement.jumpImpulse;
     }
-    
+
     public void RecalculateHighJump()
     {
         hasHighJump = false;
 
-        if (character.refs.afflictions.HasAfflictionType(CuisineAfflictionManager.TypeByName("HighJump"), out var affliction) &&
+        if (character.refs.afflictions.HasAfflictionType(CuisineAfflictionManager.TypeByName(CuisineAfflictionValues.HIGH_JUMP_NAME), out var affliction) &&
             affliction is AfflictionHighJump affliction_HighJump)
         {
             hasHighJump = true;
@@ -33,4 +34,5 @@ public class CuisineAfflictionCharacter : MonoBehaviourPunCallbacks
         m_characterMovement.jumpImpulse =
             hasHighJump ? _originalJumpImpulse * highJumpMultiplier : _originalJumpImpulse;
     }
+  
 }
