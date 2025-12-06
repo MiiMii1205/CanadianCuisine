@@ -54,15 +54,8 @@ public class AfflictionWithConsequence : Affliction
         serializer.WriteBool(consequentAffliction != null);
         serializer.WriteInt((int) (consequentAffliction?.GetAfflictionType() ?? (AfflictionType) (-1)));
 
-        if (mainAffliction != null)
-        {
-            mainAffliction.Serialize(serializer);
-        }
-
-        if (consequentAffliction != null)
-        {
-            consequentAffliction.Serialize(serializer);
-        }
+        mainAffliction?.Serialize(serializer);
+        consequentAffliction?.Serialize(serializer);
     }
 
     public override void Deserialize(BinaryDeserializer serializer)
