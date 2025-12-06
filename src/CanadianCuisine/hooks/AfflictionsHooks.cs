@@ -37,7 +37,7 @@ internal static class AfflictionsHooks
             }           
             else if (defs.Name == CuisineAfflictionValues.PARALYZED)
             {
-                returnValue = new AfflictionWithConsequence();
+                returnValue = new AfflictionParalyzed();
             }
             else
             {

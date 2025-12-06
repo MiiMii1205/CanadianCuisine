@@ -61,9 +61,9 @@ public class AfflictionWithConsequence : Affliction
 
     public override bool Tick()
     {
-        if (mainAffliction != null)
+        if (mainAffliction != null && mainAffliction.character != null)
         {
-            timeElapsed = mainAffliction.timeElapsed;
+            timeElapsed = Mathf.Max(mainAffliction.timeElapsed, timeElapsed);
             return mainAffliction.timeElapsed >= (double) mainAffliction.totalTime;
         }
 
