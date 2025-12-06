@@ -8,6 +8,7 @@ using CanadianCuisine.data;
 using HarmonyLib;
 using MonoDetour;
 using MonoDetour.HookGen;
+using Peak.Afflictions;
 using PEAKLib.Core;
 using PEAKLib.Items;
 using PEAKLib.Items.UnityEditor;
@@ -26,7 +27,7 @@ public partial class Plugin : BaseUnityPlugin
     private void FixColorblindMaterials(GameObject go)
     {
         var col = go.GetComponentInChildren<ColorblindVariant>();
-        
+
         var probableShader = Shader.Find(col.colorblindMaterial.shader.name);
 
 
@@ -40,15 +41,14 @@ public partial class Plugin : BaseUnityPlugin
         {
             col.colorblindMaterial.shader = probableShader;
         }
-        
     }
 
     private void OnDestroy()
     {
         DefaultMonoDetourManager.Instance.Dispose();
-        
+
         Harmony.UnpatchID(Id);
-        
+
         Log.LogInfo($"Plugin {Name} unloaded!");
     }
 
@@ -111,7 +111,39 @@ public partial class Plugin : BaseUnityPlugin
                 }
             ];
 
-            
+            var papinoCookie = peakBundle.LoadAsset<GameObject>("PapinoCookies.prefab");
+
+            var afflic = papinoCookie.AddComponent<Action_ApplyAffliction>();
+
+            afflic.OnCastFinished = true;
+
+            var mainEffect = new AfflictionWithConsequence()
+            {
+                mainAffliction = new Affliction_LowGravity()
+                {
+                    totalTime = 15,
+                    warning = true,
+                    lowGravAmount = 3
+                },
+                delay = 1,
+                consequentAffliction = new AfflictionParalyzed()
+                {
+                    totalTime = 8f
+                }
+            };
+
+            afflic.affliction = mainEffect;
+
+            var papCook = papinoCookie.GetOrAddComponent<ItemCooking>();
+
+            papCook.additionalCookingBehaviors = papCook.additionalCookingBehaviors.AddToArray(
+                new CookingBehavior_DisableScripts()
+                {
+                    scriptsToDisable = [afflic],
+                    cookedAmountToTrigger = 1
+                });
+
+
             /*
 
             var toffee = peakBundle.LoadAsset<GameObject>("MapleToffee.prefab");
@@ -143,17 +175,16 @@ public partial class Plugin : BaseUnityPlugin
                     peakBundle.LoadAsset<GameObject>("Bub Berry Purple.prefab"),
                     peakBundle.LoadAsset<GameObject>("Bub Berry White.prefab")
                 };
-                
+
                 foreach (var bub in allBubP)
                 {
                     // Also fix colorblinds material while we're at it...
                     FixColorblindMaterials(bub);
-                    
+
                     foreach (Renderer renderer in bub.GetComponentsInChildren<Renderer>())
                     {
                         foreach (Material mat in renderer.sharedMaterials)
                         {
-                            
                             if (mat.shader.name != leafShade.name)
                             {
                                 continue;
@@ -168,7 +199,7 @@ public partial class Plugin : BaseUnityPlugin
                             mat.EnableKeyword("_TRIPLANAR3_UV");
                             mat.EnableKeyword("_USESIMPLEMASK_ON");
                         }
-                        
+
                         foreach (Material mat in renderer.materials)
                         {
                             if (mat.shader.name != leafShade.name)
@@ -186,7 +217,6 @@ public partial class Plugin : BaseUnityPlugin
                             mat.EnableKeyword("_USESIMPLEMASK_ON");
                         }
                     }
-                    
                 }
             }
 
@@ -199,7 +229,7 @@ public partial class Plugin : BaseUnityPlugin
 
         MonoDetourManager.InvokeHookInitializers(typeof(Plugin).Assembly);
         new Harmony(Id).PatchAll(typeof(CuisineCharacterPatcher));
-        
+
         Log.LogInfo($"Plugin {Name} is loaded!");
     }
 
@@ -208,11 +238,16 @@ public partial class Plugin : BaseUnityPlugin
         CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
         {
             Name = CuisineAfflictionValues.HIGH_JUMP_NAME
-        }, ModDefinition.GetOrCreate(Info)); 
-        
+        }, ModDefinition.GetOrCreate(Info));
+
         CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
         {
             Name = CuisineAfflictionValues.WITH_CONSEQUENCE
+        }, ModDefinition.GetOrCreate(Info));
+
+        CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
+        {
+            Name = CuisineAfflictionValues.PARALYZED
         }, ModDefinition.GetOrCreate(Info));
     }
 

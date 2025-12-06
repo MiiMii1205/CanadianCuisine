@@ -37,6 +37,7 @@ public class AfflictionWithConsequence : Affliction
             {
                 totalTime = consc.totalTime;
                 timeElapsed = 0f;
+                
                 if (consc.consequentAffliction != null && consequentAffliction != null &&
                     consc.consequentAffliction.GetAfflictionType() == consequentAffliction.GetAfflictionType())
                 {
@@ -56,6 +57,18 @@ public class AfflictionWithConsequence : Affliction
 
         mainAffliction?.Serialize(serializer);
         consequentAffliction?.Serialize(serializer);
+    }
+
+    public override bool Tick()
+    {
+        if (mainAffliction != null)
+        {
+            timeElapsed = mainAffliction.timeElapsed;
+            return mainAffliction.timeElapsed >= (double) mainAffliction.totalTime;
+        }
+
+        return base.Tick();
+
     }
 
     public override void Deserialize(BinaryDeserializer serializer)

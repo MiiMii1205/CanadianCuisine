@@ -34,6 +34,10 @@ internal static class AfflictionsHooks
             else if (defs.Name == CuisineAfflictionValues.WITH_CONSEQUENCE)
             {
                 returnValue = new AfflictionWithConsequence();
+            }           
+            else if (defs.Name == CuisineAfflictionValues.PARALYZED)
+            {
+                returnValue = new AfflictionWithConsequence();
             }
             else
             {
