@@ -121,14 +121,14 @@ public partial class Plugin : BaseUnityPlugin
             {
                 mainAffliction = new Affliction_LowGravity()
                 {
-                    totalTime = 15,
+                    totalTime = 12,
                     warning = true,
                     lowGravAmount = 3
                 },
                 delay = 1,
                 consequentAffliction = new AfflictionParalyzed()
                 {
-                    totalTime = 8f
+                    totalTime = 4f
                 }
             };
 
