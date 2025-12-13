@@ -61,8 +61,22 @@
 - Fixed bubberries colorblind variants materials
 - Fixed blue bubberries bug where they don't get fully consumed at all after using  
 
-## [1.2.1] - 2025-12-02
+## [1.3.0] - 2025-12-02
 
-### Version 1.3.1
+### Version 1.3.0
 
 - Added the Coffee Chocolate Bar, a weaker but more common version of energy drinks!
+
+## [1.4.0] - 2025-12-13
+
+### Version 1.4.0
+
+- Added the All Dressed Steamie, a steamed hot-dog in a bun topped with onions, mustard and relish (counts towards the Hot-Ddg acheivement)!
+- Tweaked Papino Cookies:
+  - Reduced the wind walk effect duration from 14 seconds to 12 seconds
+  - Make the cookies remove some of your weight just like how anti-ropes do.
+  - Changed the wind walk mechanic: 
+    - When uncooked, eating a cookie will grant you wind walking as usual...
+    - ... And then make you fall for 4 seconds, so remember to find a good resting spot
+    - Once cooked, the cookies won't make you fall
+
