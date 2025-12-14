@@ -62,7 +62,7 @@ A chunky coffee infused chocolate bar.
 <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/AllDressed.png?raw=true" height="256" width="256"/>
 
 Rarity
-: Epic
+: Rare
 
 Location
 : Any luggage
