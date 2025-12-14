@@ -80,3 +80,10 @@
     - ... And then make you fall for 4 seconds, so remember to find a good resting spot
     - Once cooked, the cookies won't make you fall
 
+## [1.4.1] - 2025-12-14
+
+### Version 1.4.1
+
+- Added a "holiday season" mode that changes the rarities/spawn locations of some food items
+  - This mode starts December 1st and ends January 6th.  
+
