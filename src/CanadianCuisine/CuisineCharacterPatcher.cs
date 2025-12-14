@@ -13,7 +13,7 @@ public class CuisineCharacterPatcher
     {
         var affliction = __instance.character.gameObject.GetOrAddComponent<CuisineAfflictionCharacter>();
         
-        if (affliction != null)
+        if (affliction == null)
         {
             Plugin.Log.LogError("Can't add custom affliction manager");
         }
