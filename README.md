@@ -57,6 +57,24 @@ A chunky coffee infused chocolate bar.
 
 - A lesser but more common energy drink.
 
+### All-Dressed Steamie ###
+
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/AllDressed.png?raw=true" height="256" width="256"/>
+
+Rarity
+: Epic
+
+Location
+: Any luggage
+
+Tags
+: Packaged food, Hot-Dogs
+
+An all-dressed montreal steamed hot-dog (or "steamie" for short), completed with relish and mustard.
+
+- A slightly better hot-dog/marshmallow. 
+- Counts as a normal hot-dog.
+
 ### Maple Cookies ###
 
 <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/MapleCookies.png?raw=true" height="256" width="256"/>
