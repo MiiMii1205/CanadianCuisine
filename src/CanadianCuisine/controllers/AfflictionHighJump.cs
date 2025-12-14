@@ -67,10 +67,19 @@ public class AfflictionHighJump : Affliction
     {
         m_cuisineAfflictionCharacter ??= character.GetComponent<CuisineAfflictionCharacter>();
         m_cuisineAfflictionCharacter.RecalculateHighJump();
+        if (character.IsLocal)
+        {
+            CuisineGUIEffectManager.instance.StartHighJump();
+        }
+        
     }
 
     public override void OnRemoved()
     {
         m_cuisineAfflictionCharacter?.RecalculateHighJump();
+        if (character.IsLocal)
+        {
+            CuisineGUIEffectManager.instance.EndHighJump();
+        }
     }
 }

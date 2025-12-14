@@ -14,6 +14,9 @@ using PEAKLib.Items;
 using PEAKLib.Items.UnityEditor;
 using pworld.Scripts.Extensions;
 using UnityEngine;
+using UnityEngine.Localization.SmartFormat.Utilities;
+using Zorro.Core;
+using Object = UnityEngine.Object;
 
 namespace CanadianCuisine;
 
@@ -22,7 +25,15 @@ namespace CanadianCuisine;
 [BepInDependency(CorePlugin.Id)]
 public partial class Plugin : BaseUnityPlugin
 {
+    private static readonly DateTime December1St =
+        new((DateTime.Now.Month == 1) ? DateTime.Now.Year - 1 : DateTime.Now.Year, 12, 1);
+
+    private static readonly DateTime January6St =
+        new(((DateTime.Now.Month == 1) ? DateTime.Now.Year - 1 : DateTime.Now.Year) + 1, 1, 6);
+
     internal static ManualLogSource Log { get; private set; } = null!;
+    public static GameObject HighJumpEffectPrefab { get; private set; } = null!;
+    public static bool IsHoliday { get; private set; } = false;
 
     private void FixColorblindMaterials(GameObject go)
     {
@@ -59,6 +70,22 @@ public partial class Plugin : BaseUnityPlugin
         AddLocalizedTextCsv();
 
         Log.LogInfo($"Plugin {Name} is loading...");
+
+        // Check if it's the holiday season
+
+        var date = DateTime.Now;
+
+        if (date > December1St && date < January6St)
+        {
+            IsHoliday = true;
+            Log.LogInfo($"Happy Holidays! The holiday season will end in {January6St - date:%d} days");
+        }
+        else
+        {
+            IsHoliday = false;
+            Log.LogInfo($"Next holiday season will start in {December1St - date:%d} days.");
+        }
+
 
         this.LoadBundleWithName("canadiansnacks.peakbundle", peakBundle =>
         {
@@ -144,6 +171,33 @@ public partial class Plugin : BaseUnityPlugin
                 });
 
 
+            // If it's the holiday season, let's make the tourtière spawn anywhere
+
+            if (IsHoliday)
+            {
+                var tourte = peakBundle.LoadAsset<GameObject>("Tourtiere.prefab");
+
+                var ld = tourte.GetComponent<LootData>();
+
+                var baseRarity = ld.Rarity;
+
+                ld.spawnLocations = ld.spawnLocations
+                    .AddFlag(SpawnPool.LuggageBeach)
+                    .AddFlag(SpawnPool.LuggageJungle)
+                    .AddFlag(SpawnPool.LuggageCaldera)
+                    .AddFlag(SpawnPool.LuggageMesa)
+                    .AddFlag(SpawnPool.LuggageRoots);
+
+                ld.rarityOverrides.Add(new ItemRarityOverride()
+                {
+                    Rarity = baseRarity - 1,
+                    spawnPool = SpawnPool.LuggageTundra
+                });
+
+                // TODO: Add creamed sugar to the list
+            }
+
+
             /*
 
             var toffee = peakBundle.LoadAsset<GameObject>("MapleToffee.prefab");
@@ -151,6 +205,8 @@ public partial class Plugin : BaseUnityPlugin
             toffee.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.AddComponent<MapleToffeeVariantController>();*/
 
             peakBundle.Mod.RegisterContent();
+
+            HighJumpEffectPrefab = peakBundle.LoadAsset<GameObject>("VFX_Screen_HighJump.prefab");
         });
 
         Log.LogInfo("Snacks items are loaded!");

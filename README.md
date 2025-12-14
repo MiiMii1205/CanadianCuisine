@@ -70,7 +70,7 @@ Location
 Tags
 : Packaged food, Hot-Dogs
 
-An all-dressed montreal steamed hot-dog (or "steamie" for short), completed with relish and mustard.
+An all-dressed Montreal steamed hot-dog (or "steamie" for short), completed with relish and mustard.
 
 - A slightly better hot-dog/marshmallow. 
 - Counts as a normal hot-dog.
