@@ -169,7 +169,56 @@ public partial class Plugin : BaseUnityPlugin
                     scriptsToDisable = [afflic],
                     cookedAmountToTrigger = 1
                 });
+            
+            
+            // Adding Sugar Fudge effect
+            var sugarFudge = peakBundle.LoadAsset<GameObject>("SugarFudge.prefab");
+            
+            var sfCook = sugarFudge.GetOrAddComponent<ItemCooking>();
 
+            var unCookedAfflic = sugarFudge.AddComponent<Action_ApplyAffliction>();
+
+            unCookedAfflic.OnCastFinished = true;
+
+            unCookedAfflic.affliction = new AfflictionWithConsequence()
+            {
+                mainAffliction = new AfflictionHighJump()
+                {
+                    totalTime = 12,
+                    highJumpMultiplier = 6,
+                },
+                consequentAffliction = new Affliction_AdjustDrowsyOverTime()
+                {
+                    totalTime = 10,
+                    statusPerSecond = 0.0333f
+                }
+            };
+
+
+            var cookedAfflic = sugarFudge.AddComponent<Action_ApplyAffliction>();
+
+            cookedAfflic.OnCastFinished = true;
+
+            cookedAfflic.affliction = new AfflictionHighJump()
+            {
+                totalTime = 12,
+                highJumpMultiplier = 6,
+            };
+
+            cookedAfflic.enabled = false;
+
+
+            sfCook.additionalCookingBehaviors = sfCook.additionalCookingBehaviors.AddToArray(
+                new CookingBehavior_DisableScripts()
+                {
+                    scriptsToDisable = [unCookedAfflic],
+                    cookedAmountToTrigger = 1
+                }).AddToArray(
+                new CookingBehavior_EnableScripts()
+                {
+                    scriptsToEnable = [cookedAfflic],
+                    cookedAmountToTrigger = 1
+                });
 
             // If it's the holiday season, let's make the tourtière spawn anywhere
 
@@ -194,7 +243,26 @@ public partial class Plugin : BaseUnityPlugin
                     spawnPool = SpawnPool.LuggageTundra
                 });
 
-                // TODO: Add creamed sugar to the list
+                var sfld = sugarFudge.GetComponent<LootData>();
+                
+                var sfldRar = sfld.Rarity;
+                
+                sfld.rarityOverrides =
+                [
+                    new ItemRarityOverride()
+                    {
+                        Rarity = sfldRar - 2,
+                        spawnPool = SpawnPool.LuggageTundra
+                    },
+                    new ItemRarityOverride()
+                    {
+                        Rarity = sfldRar - 1,
+                        spawnPool = SpawnPool.LuggageMesa
+                    }
+                ];
+
+                sfld.Rarity = sfldRar - 1;
+
             }
 
 

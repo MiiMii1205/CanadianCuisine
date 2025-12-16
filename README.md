@@ -181,6 +181,26 @@ A sweet maple treat on a wooden stick.
 
 - Essentially a lesser lollipop, but a bit more common.
 
+
+### Maple Fudge ###
+
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/SugarFudge.png?raw=true" height="256" width="256"/>
+
+Rarity
+: Legendary, Epic in Alpine's Luggage and Mesa's Luggage 
+
+Location
+: Any luggage
+
+Tags
+: Packaged food
+
+A homemade fudge-like candy made with cream and brown sugar. 
+
+- Has 3 uses
+- Consuming it will make you jump higher for 12 seconds...
+- ... And gets you tired like an energy drink afterward (can be removed by cooking as usual)
+
 ### Papino Cookies ###
 
 <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PapinoCookies.png?raw=true" height="256" width="256"/>
