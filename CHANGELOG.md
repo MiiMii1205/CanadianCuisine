@@ -87,3 +87,12 @@
 - Added a "holiday season" mode that changes the rarities/spawn locations of some food items
   - This mode starts December 1st and ends January 6th.  
 
+
+## [1.5.0] - 2025-12-15
+
+### Version 1.5.0
+
+- Added the Maple Fudge, a homemade fudge-like candy that grands higher jumps for 12 seconds
+- Fixed a bug with the tourtière not playing its animations correctly
+- Updated some food icons
+
