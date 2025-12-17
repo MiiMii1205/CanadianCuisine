@@ -1,14 +1,13 @@
-﻿using CanadianCuisine.data;
-using Peak.Afflictions;
+﻿using CanadianCuisine.Data;
 using UnityEngine;
 using Zorro.Core.Serizalization;
 
-namespace CanadianCuisine.controllers;
+namespace CanadianCuisine.Behaviours.Afflictions;
 
-public class AfflictionHighJump : Affliction
+public class AfflictionHighJump : Peak.Afflictions.Affliction
 {
     public float highJumpMultiplier = 2f;
-    private CuisineAfflictionCharacter? m_cuisineAfflictionCharacter;
+    private CuisineCharacterAfflictions? m_cuisineAfflictionCharacter;
     private Color m_jumpy = new(0.48599997f, 0.73300004f, 0.59599996f);
 
 
@@ -37,7 +36,7 @@ public class AfflictionHighJump : Affliction
         return CuisineAfflictionManager.TypeByName(CuisineAfflictionValues.HIGH_JUMP_NAME);
     }
 
-    public override void Stack(Affliction incomingAffliction)
+    public override void Stack(Peak.Afflictions.Affliction incomingAffliction)
     {
         totalTime = incomingAffliction.totalTime;
 
@@ -47,7 +46,7 @@ public class AfflictionHighJump : Affliction
         }
         
         timeElapsed = 0f;
-        m_cuisineAfflictionCharacter ??= character.GetComponent<CuisineAfflictionCharacter>();
+        m_cuisineAfflictionCharacter ??= character.GetComponent<CuisineCharacterAfflictions>();
         m_cuisineAfflictionCharacter.RecalculateHighJump();
     }
 
@@ -65,11 +64,11 @@ public class AfflictionHighJump : Affliction
 
     public override void OnApplied()
     {
-        m_cuisineAfflictionCharacter ??= character.GetComponent<CuisineAfflictionCharacter>();
+        m_cuisineAfflictionCharacter ??= character.GetComponent<CuisineCharacterAfflictions>();
         m_cuisineAfflictionCharacter.RecalculateHighJump();
         if (character.IsLocal)
         {
-            CuisineGUIEffectManager.instance.StartHighJump();
+            CuisineGUIManager.instance.StartHighJump();
         }
         
     }
@@ -79,7 +78,7 @@ public class AfflictionHighJump : Affliction
         m_cuisineAfflictionCharacter?.RecalculateHighJump();
         if (character.IsLocal)
         {
-            CuisineGUIEffectManager.instance.EndHighJump();
+            CuisineGUIManager.instance.EndHighJump();
         }
     }
 }

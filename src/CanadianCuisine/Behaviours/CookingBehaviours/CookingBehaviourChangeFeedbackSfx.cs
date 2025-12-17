@@ -1,10 +1,10 @@
-﻿namespace CanadianCuisine.controllers;
+﻿namespace CanadianCuisine.Behaviours.CookingBehaviours;
 
-public class CookingBehaviorChangeFeedbackSfx : AdditionalCookingBehavior
+public class CookingBehaviourChangeFeedbackSfx : AdditionalCookingBehavior
 {
     public string soundEffectNameToChangeTo = "";
 
-    public CookingBehaviorChangeFeedbackSfx()
+    public CookingBehaviourChangeFeedbackSfx()
     {
         if (soundEffectNameToChangeTo == "")
         {

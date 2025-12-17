@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using PEAKLib.Core;
 using System.Linq;
-using CanadianCuisine.data;
+using PEAKLib.Core;
 using static Peak.Afflictions.Affliction;
 
-namespace CanadianCuisine.controllers;
+namespace CanadianCuisine.Data;
 
 public static class CuisineAfflictionManager
 {
@@ -48,7 +47,7 @@ public static class CuisineAfflictionManager
             // place new status effects into un-defined vanilla enum values
             if (!Enum.IsDefined(typeof(AfflictionType), i))
             {
-                reg[j].Index = i;
+                reg[j].index = i;
                 j++;
             }
         }

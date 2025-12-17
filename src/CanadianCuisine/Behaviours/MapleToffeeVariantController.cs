@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace CanadianCuisine.controllers;
+namespace CanadianCuisine.Behaviours;
 
 public class MapleToffeeVariantController: MonoBehaviour
 {
     private void Start()
     {
         var t = transform;
-        var choosenVariantIndex = Random.Range(0, t.childCount);
+        var chosenVariantIndex = Random.Range(0, t.childCount);
 
         var r = GetComponentsInChildren<MeshRenderer>();
         
@@ -17,7 +17,7 @@ public class MapleToffeeVariantController: MonoBehaviour
             meshRenderer.gameObject.SetActive(false);
         }
         
-        t.GetChild(choosenVariantIndex).gameObject.SetActive(true);
+        t.GetChild(chosenVariantIndex).gameObject.SetActive(true);
 
     }
 }

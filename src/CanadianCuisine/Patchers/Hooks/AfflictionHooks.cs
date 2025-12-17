@@ -1,16 +1,14 @@
-﻿using CanadianCuisine.controllers;
-using System;
-using CanadianCuisine.data;
+﻿using CanadianCuisine.Behaviours.Afflictions;
+using CanadianCuisine.Data;
+using Md.Peak.Afflictions.Affliction;
 using MonoDetour;
 using MonoDetour.HookGen;
-using Md.Peak.Afflictions.Affliction;
 using Peak.Afflictions;
-using UnityEngine;
 
-namespace CanadianCuisine.hooks;
+namespace CanadianCuisine.Patchers.Hooks;
 
 [MonoDetourTargets(typeof(Affliction))]
-internal static class AfflictionsHooks
+internal static class AfflictionHooks
 {
     [MonoDetourHookInitialize]
     static void Init()
@@ -21,7 +19,7 @@ internal static class AfflictionsHooks
     private static void Postfix_BlankAffliction(ref Affliction.AfflictionType afflictionType,
         ref Affliction returnValue)
     {
-        if (returnValue == null)
+        if (((Affliction?) returnValue) == null)
         {
             var defs = CuisineAfflictionManager.StatusByType(afflictionType);
 
@@ -38,10 +36,6 @@ internal static class AfflictionsHooks
             else if (defs.Name == CuisineAfflictionValues.PARALYZED)
             {
                 returnValue = new AfflictionParalyzed();
-            }
-            else
-            {
-                returnValue = returnValue;
             }
         }
     }

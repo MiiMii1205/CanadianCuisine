@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using BepInEx;
 using BepInEx.Logging;
-using CanadianCuisine.controllers;
-using CanadianCuisine.data;
+using CanadianCuisine.Behaviours.Afflictions;
+using CanadianCuisine.Behaviours.CookingBehaviours;
+using CanadianCuisine.Data;
+using CanadianCuisine.Patchers;
 using HarmonyLib;
 using MonoDetour;
 using MonoDetour.HookGen;
 using Peak.Afflictions;
 using PEAKLib.Core;
 using PEAKLib.Items;
-using PEAKLib.Items.UnityEditor;
 using pworld.Scripts.Extensions;
 using UnityEngine;
-using UnityEngine.Localization.SmartFormat.Utilities;
 using Zorro.Core;
-using Object = UnityEngine.Object;
 
 namespace CanadianCuisine;
 
@@ -37,20 +36,19 @@ public partial class Plugin : BaseUnityPlugin
 
     private void FixColorblindMaterials(GameObject go)
     {
-        var col = go.GetComponentInChildren<ColorblindVariant>();
+        var colorblindVariant = go.GetComponentInChildren<ColorblindVariant>();
 
-        var probableShader = Shader.Find(col.colorblindMaterial.shader.name);
-
-
+        var probableShader = Shader.Find(colorblindVariant.colorblindMaterial.shader.name);
+        
         if (probableShader == null)
         {
             Log.LogWarning(
-                $": Shader {col.colorblindMaterial.shader.name} was not found."
+                $": Shader {colorblindVariant.colorblindMaterial.shader.name} was not found."
             );
         }
         else
         {
-            col.colorblindMaterial.shader = probableShader;
+            colorblindVariant.colorblindMaterial.shader = probableShader;
         }
     }
 
@@ -97,7 +95,7 @@ public partial class Plugin : BaseUnityPlugin
 
             itCook.additionalCookingBehaviors =
             [
-                new CookingBehaviorChangeFeedbackSfx()
+                new CookingBehaviourChangeFeedbackSfx()
                 {
                     cookedAmountToTrigger = 1,
                     soundEffectNameToChangeTo = "SFXI Heal Hunger Stamina"
@@ -107,7 +105,7 @@ public partial class Plugin : BaseUnityPlugin
                     cookedAmountToTrigger = 1,
                     scriptsToEnable = [prefab.GetComponent<Action_GiveExtraStamina>()]
                 },
-                new CookingBehaviorChangeFeedbackSfx()
+                new CookingBehaviourChangeFeedbackSfx()
                 {
                     cookedAmountToTrigger = 3,
                     soundEffectNameToChangeTo = "SFXI Heal Fortified Milk"
@@ -122,7 +120,7 @@ public partial class Plugin : BaseUnityPlugin
                     cookedAmountToTrigger = 3,
                     scriptsToEnable = [prefab.GetComponent<Action_GiveExtraStamina>()]
                 },
-                new CookingBehaviorChangeFeedbackSfx()
+                new CookingBehaviourChangeFeedbackSfx()
                 {
                     cookedAmountToTrigger = 4,
                     soundEffectNameToChangeTo = "SFXI Heal Hunger Normal"
@@ -275,9 +273,9 @@ public partial class Plugin : BaseUnityPlugin
             peakBundle.Mod.RegisterContent();
 
             HighJumpEffectPrefab = peakBundle.LoadAsset<GameObject>("VFX_Screen_HighJump.prefab");
+            
+            Log.LogInfo("Snacks items are loaded!");
         });
-
-        Log.LogInfo("Snacks items are loaded!");
 
         this.LoadBundleWithName("canadianfruits.peakbundle", peakBundle =>
         {
@@ -345,12 +343,13 @@ public partial class Plugin : BaseUnityPlugin
             }
 
             peakBundle.Mod.RegisterContent();
+            
+            Log.LogInfo("Fruits items are loaded!");
+            
         });
-        Log.LogInfo("Fruits items are loaded!");
 
         LoadAllCustomAfflictions();
-
-
+        
         MonoDetourManager.InvokeHookInitializers(typeof(Plugin).Assembly);
         new Harmony(Id).PatchAll(typeof(CuisineCharacterPatcher));
 
@@ -359,20 +358,22 @@ public partial class Plugin : BaseUnityPlugin
 
     private void LoadAllCustomAfflictions()
     {
+        var modDefinition = ModDefinition.GetOrCreate(Info);
+        
         CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
         {
             Name = CuisineAfflictionValues.HIGH_JUMP_NAME
-        }, ModDefinition.GetOrCreate(Info));
+        }, modDefinition);
 
         CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
         {
             Name = CuisineAfflictionValues.WITH_CONSEQUENCE
-        }, ModDefinition.GetOrCreate(Info));
+        }, modDefinition);
 
         CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
         {
             Name = CuisineAfflictionValues.PARALYZED
-        }, ModDefinition.GetOrCreate(Info));
+        }, modDefinition);
     }
 
     private void AddLocalizedTextCsv()

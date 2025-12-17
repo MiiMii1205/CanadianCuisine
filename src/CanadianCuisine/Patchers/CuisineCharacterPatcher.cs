@@ -1,12 +1,10 @@
-﻿using System;
-using CanadianCuisine.controllers;
+﻿using CanadianCuisine.Behaviours;
 using HarmonyLib;
 using Photon.Pun;
 using pworld.Scripts.Extensions;
-using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace CanadianCuisine;
+namespace CanadianCuisine.Patchers;
 
 public class CuisineCharacterPatcher
 {
@@ -14,11 +12,11 @@ public class CuisineCharacterPatcher
     [HarmonyPostfix]
     public static void AfflictionAwakePostfix(CharacterAfflictions __instance)
     {
-        var affliction = __instance.character.gameObject.GetOrAddComponent<CuisineAfflictionCharacter>();
+        var affliction = __instance.character.gameObject.GetOrAddComponent<CuisineCharacterAfflictions>();
 
         if (affliction == null)
         {
-            Plugin.Log.LogError("Can't add custom affliction manager");
+            Plugin.Log.LogError($"Can't add CuisineCharacterAfflictions to {__instance.character.characterName}");
         }
     }
 
@@ -26,13 +24,13 @@ public class CuisineCharacterPatcher
     [HarmonyPostfix]
     public static void GUIAwakePostfix(GUIManager __instance)
     {
-        var man = __instance.gameObject.GetOrAddComponent<CuisineGUIEffectManager>();
+        var man = __instance.gameObject.GetOrAddComponent<CuisineGUIManager>();
 
         var effectTrs = __instance.poisonSVFX.transform;
 
         if (man == null)
         {
-            Plugin.Log.LogError("Can't add custom GUI manager");
+            Plugin.Log.LogError($"Can't add CuisineGUIManager to {__instance.character.characterName}'s GUI");
         }
         else
         {
@@ -40,7 +38,7 @@ public class CuisineCharacterPatcher
             effects.transform.transform.localPosition = effectTrs.localPosition;
             effects.transform.transform.localRotation = effectTrs.localRotation;
             effects.transform.transform.localScale = effectTrs.localScale;
-            man.highJumpSVFX = effects.GetComponent<ScreenVFX>();
+            man.highJumpSvfx = effects.GetComponent<ScreenVFX>();
             effects.SetActive(false);
         }
     }
@@ -49,13 +47,14 @@ public class CuisineCharacterPatcher
     [HarmonyPrefix]
     public static void CheckForPalJumpPrefix(CharacterMovement __instance, Character c, ref bool __runOriginal)
     {
-        if (c.GetComponent<CuisineAfflictionCharacter>() is not {HasHighJump: true})
+        if (c.GetComponent<CuisineCharacterAfflictions>() is not {HasHighJump: true})
         {
             __runOriginal = true;
         }
         else
         {
             __runOriginal = false;
+            Plugin.Log.LogInfo($"High Jump boost given to {__instance.character.characterName} by {c.characterName}");
             if (__instance.character.data.sinceStandOnPlayer < 0.3f && c.data.sinceJump < 0.3f)
             {
                 __instance.character.data.lastStoodOnPlayer = null;
@@ -72,13 +71,14 @@ public class CuisineCharacterPatcher
     [HarmonyPrefix]
     public static void RPCA_ClimbJumpPrefix(CharacterClimbing __instance, ref bool __runOriginal)
     {
-        if (__instance.GetComponent<CuisineAfflictionCharacter>() is not {HasHighJump: true} cac)
+        if (__instance.GetComponent<CuisineCharacterAfflictions>() is not {HasHighJump: true} cac)
         {
             __runOriginal = true;
         }
         else
         {
             __runOriginal = false;
+            Plugin.Log.LogInfo($"{__instance.character.characterName} lunged while in high jump.");
             // OG Code
             __instance.character.data.sinceClimbJump = 0f;
             __instance.character.UseStamina(0.2f);

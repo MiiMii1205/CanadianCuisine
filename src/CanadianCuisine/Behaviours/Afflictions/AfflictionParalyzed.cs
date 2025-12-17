@@ -1,10 +1,9 @@
-﻿using CanadianCuisine.data;
-using Peak.Afflictions;
+﻿using CanadianCuisine.Data;
 using Zorro.Core.Serizalization;
 
-namespace CanadianCuisine.controllers;
+namespace CanadianCuisine.Behaviours.Afflictions;
 
-public class AfflictionParalyzed: Affliction
+public class AfflictionParalyzed: Peak.Afflictions.Affliction
 {
 
     public override AfflictionType GetAfflictionType()
@@ -12,7 +11,7 @@ public class AfflictionParalyzed: Affliction
         return CuisineAfflictionManager.TypeByName(CuisineAfflictionValues.PARALYZED);
     }
 
-    public override void Stack(Affliction incomingAffliction)
+    public override void Stack(Peak.Afflictions.Affliction incomingAffliction)
     {
     }
 

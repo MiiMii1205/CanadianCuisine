@@ -1,16 +1,14 @@
-﻿using CanadianCuisine.data;
-using Md.Peak.Afflictions.Affliction;
-using Peak.Afflictions;
+﻿using CanadianCuisine.Data;
 using UnityEngine;
 using Zorro.Core.Serizalization;
 
-namespace CanadianCuisine.controllers;
+namespace CanadianCuisine.Behaviours.Afflictions;
 
-public class AfflictionWithConsequence : Affliction
+public class AfflictionWithConsequence : Peak.Afflictions.Affliction
 {
-    [SerializeReference] public Affliction? mainAffliction;
+    [SerializeReference] public Peak.Afflictions.Affliction? mainAffliction;
 
-    [SerializeReference] public Affliction? consequentAffliction;
+    [SerializeReference] public Peak.Afflictions.Affliction? consequentAffliction;
 
     public float delay = 0f;
 
@@ -28,7 +26,7 @@ public class AfflictionWithConsequence : Affliction
         return CuisineAfflictionManager.TypeByName(CuisineAfflictionValues.WITH_CONSEQUENCE);
     }
 
-    public override void Stack(Affliction incomingAffliction)
+    public override void Stack(Peak.Afflictions.Affliction incomingAffliction)
     {
         if (incomingAffliction is AfflictionWithConsequence consc)
         {
