@@ -8,12 +8,12 @@ public class AfflictionHighJump : Peak.Afflictions.Affliction
 {
     public float highJumpMultiplier = 2f;
     private CuisineCharacterAfflictions? m_cuisineAfflictionCharacter;
-    private Color m_jumpy = new(0.48599997f, 0.73300004f, 0.59599996f);
+    private Color m_jumpy = new(0.48599997f, 0.73300004f, 0.59599996f, 0.125F);
 
 
     public override void UpdateEffectNetworked()
     {
-        character.refs.customization.PulseStatus(m_jumpy);
+        character.refs.customization.PulseStatus(m_jumpy, m_jumpy.a);
     }
 
     public AfflictionHighJump(float totalTime, float highJumpMultiplier)
