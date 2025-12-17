@@ -96,3 +96,10 @@
 - Fixed a bug with the tourtière not playing its animations correctly
 - Updated some food icons
 
+
+## [1.5.1] - 2025-12-17
+
+### Version 1.5.1
+
+- Extended the lunge reach during a High Jump Affliction
+- Made boosts be affected by the High Jump Affliction
