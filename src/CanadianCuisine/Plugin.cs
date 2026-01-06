@@ -393,8 +393,8 @@ public partial class Plugin : BaseUnityPlugin
             }
 
             currentLine++;
-
-            List<string> valList = new List<string>(line.Split(','));
+            
+            var valList = new List<string>(CSVReader.SplitCsvLine(line));
 
             var locName = valList.Deque();
 
