@@ -226,25 +226,26 @@ A legendary yet so simple cookie. So light and soft, you'll feel like you've rea
 <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/BlueBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PurpleBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/WhiteBubBerry.png?raw=true" height="256" width="256"/>
 
 Rarity
-: (Blue, white) Uncommon, (purple) Rare (all are +1 rarer on vines)
+: Legendary, Ridiculously Rare in Beach's Luggage
 
 Location
-: Bushes (Shore, Tropics), Spike Vines
+: Mesa, Caldera and Beach Luggage
 
 Tags
-: Berries
+: Packaged Food
 
-Small (usually) blue berries, found in bushes and along thorny vines.
+A 2 L bottle of refreshing Spruce Beer, a soft drink made from spruces pines.
 
-- 3 uses berries;
-- 3 variants: one poisonous (which can be cooked off), one normal and one giving extra stamina.
+- 5 uses
+- Reduces Heat and removes some Hunger
+- Can be cooked, but you might want to watch out when opening a brand new one...
 
 ### Spruce Beer ###
 
-<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/BlueBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PurpleBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/WhiteBubBerry.png?raw=true" height="256" width="256"/>
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/SpruceBeer.png?raw=true" height="256" width="256"/>
 
 Rarity
-: (Blue, white) Uncommon, (purple) Rare (all are +1 rarer on vines)
+: Mythic
 
 Location
 : Bushes (Shore, Tropics), Spike Vines
