@@ -234,7 +234,7 @@ Location
 Tags
 : Packaged Food
 
-A 2 L bottle of refreshing Spruce Beer, a soft drink made from spruces pines.
+A 2 L bottle of refreshing Spruce Beer, a soft drink made from spruce pines.
 
 - 5 uses
 - Reduces Heat and removes some Hunger
