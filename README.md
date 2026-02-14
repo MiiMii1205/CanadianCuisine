@@ -245,7 +245,7 @@ A 2 L bottle of refreshing Spruce Beer, a soft drink made from spruces pines.
 <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/BlueBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PurpleBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/WhiteBubBerry.png?raw=true" height="256" width="256"/>
 
 Rarity
-: Mythic
+: (Blue, white) Uncommon, (purple) Rare (all are +1 rarer on vines)
 
 Location
 : Bushes (Shore, Tropics), Spike Vines
