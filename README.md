@@ -221,9 +221,9 @@ A legendary yet so simple cookie. So light and soft, you'll feel like you've rea
 - You might want to hold on to it very tightly...
 - ... but cooking it might help you a bit!
 
-### Bub Berry ###
+### Spruce Beer ###
 
-<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/BlueBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PurpleBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/WhiteBubBerry.png?raw=true" height="256" width="256"/>
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/SpruceBeer.png?raw=true" height="256" width="256"/>
 
 Rarity
 : Legendary, Ridiculously Rare in Beach's Luggage
@@ -240,9 +240,9 @@ A 2 L bottle of refreshing Spruce Beer, a soft drink made from spruces pines.
 - Reduces Heat and removes some Hunger
 - Can be cooked, but you might want to watch out when opening a brand new one...
 
-### Spruce Beer ###
+### Bub Berry ###
 
-<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/SpruceBeer.png?raw=true" height="256" width="256"/>
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/BlueBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PurpleBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/WhiteBubBerry.png?raw=true" height="256" width="256"/>
 
 Rarity
 : Mythic
