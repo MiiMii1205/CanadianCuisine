@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using BepInEx;
 using BepInEx.Logging;
+using CanadianCuisine.Behaviours;
 using CanadianCuisine.Behaviours.Afflictions;
 using CanadianCuisine.Behaviours.CookingBehaviours;
 using CanadianCuisine.Data;
@@ -136,6 +137,8 @@ public partial class Plugin : BaseUnityPlugin
                 }
             ];
 
+            prefab.AddComponent<CookingHungerController>();
+
             var papinoCookie = peakBundle.LoadAsset<GameObject>("PapinoCookies.prefab");
 
             var afflic = papinoCookie.AddComponent<Action_ApplyAffliction>();
@@ -158,6 +161,8 @@ public partial class Plugin : BaseUnityPlugin
             };
 
             afflic.affliction = mainEffect;
+            
+            papinoCookie.AddComponent<CookingHungerController>();
 
             var papCook = papinoCookie.GetOrAddComponent<ItemCooking>();
 
@@ -171,6 +176,9 @@ public partial class Plugin : BaseUnityPlugin
             
             // Adding Sugar Fudge effect
             var sugarFudge = peakBundle.LoadAsset<GameObject>("SugarFudge.prefab");
+
+
+            sugarFudge.AddComponent<CookingHungerController>();
             
             var sfCook = sugarFudge.GetOrAddComponent<ItemCooking>();
 
@@ -218,11 +226,14 @@ public partial class Plugin : BaseUnityPlugin
                     cookedAmountToTrigger = 1
                 });
 
-            // If it's the holiday season, let's make the tourtière spawn anywhere
 
+                var tourte = peakBundle.LoadAsset<GameObject>("Tourtiere.prefab");
+
+                tourte.AddComponent<CookingHungerController>();
+                
+            // If it's the holiday season, let's make the tourtière spawn anywhere
             if (IsHoliday)
             {
-                var tourte = peakBundle.LoadAsset<GameObject>("Tourtiere.prefab");
 
                 var ld = tourte.GetComponent<LootData>();
 
@@ -264,6 +275,43 @@ public partial class Plugin : BaseUnityPlugin
             }
 
 
+            var pawc = peakBundle.LoadAsset<GameObject>("Paw Cakes.prefab");
+
+            pawc.AddComponent<CookingHungerController>();
+            
+            var maplCookies = peakBundle.LoadAsset<GameObject>("MapleCookies.prefab");
+
+            maplCookies.AddComponent<CookingHungerController>();
+            
+            var pout = peakBundle.LoadAsset<GameObject>("Airplane Poutine.prefab");
+
+            pout.AddComponent<CookingHungerController>();
+            
+            var spruceBeer = peakBundle.LoadAsset<GameObject>("SpruceBeer.prefab");
+
+            spruceBeer.AddComponent<CookingHungerController>();
+            
+            var sbic = spruceBeer.GetOrAddComponent<ItemCooking>();
+
+            var beerPop = spruceBeer.GetOrAddComponent<ActionSpawnOnFirstUse>();
+
+            var normalPop = spruceBeer.GetComponent<Action_Spawn>();
+            
+            beerPop.objectToSpawn = normalPop.objectToSpawn;
+            beerPop.OnCastFinished = true;
+
+            normalPop.enabled = false;
+            beerPop.enabled = false;
+            Destroy(normalPop);
+
+            sbic.additionalCookingBehaviors = sbic.additionalCookingBehaviors.AddToArray(
+                new CookingBehavior_EnableScripts()
+                {
+                    cookedAmountToTrigger = 1,
+                    scriptsToEnable = [beerPop]
+                });
+            
+
             /*
 
             var toffee = peakBundle.LoadAsset<GameObject>("MapleToffee.prefab");
@@ -302,6 +350,8 @@ public partial class Plugin : BaseUnityPlugin
                 {
                     // Also fix colorblinds material while we're at it...
                     FixColorblindMaterials(bub);
+                    
+                    bub.AddComponent<CookingHungerController>();
 
                     foreach (Renderer renderer in bub.GetComponentsInChildren<Renderer>())
                     {

@@ -239,6 +239,24 @@ Small (usually) blue berries, found in bushes and along thorny vines.
 - 3 uses berries;
 - 3 variants: one poisonous (which can be cooked off), one normal and one giving extra stamina.
 
+### Spruce Beer ###
+
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/BlueBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PurpleBubBerry.png?raw=true" height="256" width="256"/> <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/WhiteBubBerry.png?raw=true" height="256" width="256"/>
+
+Rarity
+: (Blue, white) Uncommon, (purple) Rare (all are +1 rarer on vines)
+
+Location
+: Bushes (Shore, Tropics), Spike Vines
+
+Tags
+: Berries
+
+Small (usually) blue berries, found in bushes and along thorny vines.
+
+- 3 uses berries;
+- 3 variants: one poisonous (which can be cooked off), one normal and one giving extra stamina.
+
 # Item Suggestions #
 
 If you have suggestions for new items, please [open an issue on the GitHub repository here](https://github.com/MiiMii1205/CanadianCuisine/issues/new).

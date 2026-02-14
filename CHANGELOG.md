@@ -109,3 +109,11 @@
 
 - Updated some food icons
 - Added colorblinds alt icons for all bubberries
+
+## [1.6.0] - 2026-02-14
+
+### Version 1.6.0
+
+- Updated food icons
+- Added the Spruce Beer, a refreshing shareable soft drink
+- Fixed a bug with the amount of hunger to resotre of cooked food items 
