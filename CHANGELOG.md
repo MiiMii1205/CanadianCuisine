@@ -117,3 +117,9 @@
 - Updated food icons
 - Added the Spruce Beer, a refreshing shareable soft drink
 - Fixed a bug with the amount of hunger to resotre of cooked food items 
+
+## [1.6.1] - 2026-04-13
+
+### Version 1.6.1
+
+- Added missing weight to the Tourtière 

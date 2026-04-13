@@ -231,6 +231,11 @@ public partial class Plugin : BaseUnityPlugin
 
                 tourte.AddComponent<CookingHungerController>();
                 
+                if (tourte.TryGetComponent(out Item it))
+                {
+                    it.carryWeight = 2;
+                }
+                
             // If it's the holiday season, let's make the tourtière spawn anywhere
             if (IsHoliday)
             {
