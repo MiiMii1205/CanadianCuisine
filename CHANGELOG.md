@@ -123,3 +123,21 @@
 ### Version 1.6.1
 
 - Added missing weight to the Tourtière 
+
+## [1.6.2] - 2026-04-18
+
+### Version 1.6.2
+
+- Fixed missing knockback for the cooked spruce beer.
+
+## [2.0.0] - 2026-08-11
+
+### Version 2.0.0
+
+- Added "The Final Ascent" support! 
+
+## [2.0.1] - 2026-08-27
+
+### Version 2.0.1
+
+- Added item optimisations, custom jetpack fuel values to most items.

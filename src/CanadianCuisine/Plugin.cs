@@ -11,6 +11,7 @@ using CanadianCuisine.Patchers;
 using HarmonyLib;
 using MonoDetour;
 using MonoDetour.HookGen;
+using Peak;
 using Peak.Afflictions;
 using PEAKLib.Core;
 using PEAKLib.Items;
@@ -40,7 +41,7 @@ public partial class Plugin : BaseUnityPlugin
         var colorblindVariant = go.GetComponentInChildren<ColorblindVariant>();
 
         var probableShader = Shader.Find(colorblindVariant.colorblindMaterial.shader.name);
-        
+
         if (probableShader == null)
         {
             Log.LogWarning(
@@ -90,8 +91,19 @@ public partial class Plugin : BaseUnityPlugin
         {
             var prefab = peakBundle.LoadAsset<GameObject>("HostCuttings.prefab");
 
-            var itCook = prefab.AddComponent<ItemCooking>();
+            var hcto = prefab.GetOrAddComponent<ItemOptimizer>();
+            hcto.item = prefab.GetComponent<Item>();
 
+            prefab.GetOrAddComponent<PhotonCleanupHelper>();
+
+            var itCook = prefab.AddComponent<ItemCooking>();
+            itCook.item = hcto.item;
+
+            itCook.item.overrideJetpackFuel = true;
+            itCook.item.overrideJetpackFuelAmount = 10;
+            itCook.item.overrideJetpackFuelPerUse = 20;
+            itCook.item.overrideJetpackFuelPerFuelMult = 1;
+            
             itCook.ignoreDefaultCookBehavior = true;
 
             itCook.additionalCookingBehaviors =
@@ -141,7 +153,20 @@ public partial class Plugin : BaseUnityPlugin
 
             var papinoCookie = peakBundle.LoadAsset<GameObject>("PapinoCookies.prefab");
 
+
+            papinoCookie.GetOrAddComponent<PhotonCleanupHelper>();
+            
+            var papto = papinoCookie.GetOrAddComponent<ItemOptimizer>();
+            papto.item = papinoCookie.GetComponent<Item>();
+            
+            papto.item.overrideJetpackFuel = true;
+            papto.item.overrideJetpackFuelAmount = 10;
+            papto.item.overrideJetpackFuelPerUse = 20;
+            papto.item.overrideJetpackFuelPerFuelMult = 1;
+
             var afflic = papinoCookie.AddComponent<Action_ApplyAffliction>();
+
+            afflic.item = papto.item;
 
             afflic.OnCastFinished = true;
 
@@ -161,7 +186,7 @@ public partial class Plugin : BaseUnityPlugin
             };
 
             afflic.affliction = mainEffect;
-            
+
             papinoCookie.AddComponent<CookingHungerController>();
 
             var papCook = papinoCookie.GetOrAddComponent<ItemCooking>();
@@ -172,12 +197,15 @@ public partial class Plugin : BaseUnityPlugin
                     scriptsToDisable = [afflic],
                     cookedAmountToTrigger = 1
                 });
-            
-            
+
+
             // Adding Sugar Fudge effect
             var sugarFudge = peakBundle.LoadAsset<GameObject>("SugarFudge.prefab");
 
-
+            sugarFudge.GetOrAddComponent<PhotonCleanupHelper>();
+            
+            var sgfto = sugarFudge.GetOrAddComponent<ItemOptimizer>();
+            sgfto.item = sugarFudge.GetComponent<Item>();
             sugarFudge.AddComponent<CookingHungerController>();
             
             var sfCook = sugarFudge.GetOrAddComponent<ItemCooking>();
@@ -200,8 +228,11 @@ public partial class Plugin : BaseUnityPlugin
                 }
             };
 
-
+            unCookedAfflic.item = sgfto.item;
+            
             var cookedAfflic = sugarFudge.AddComponent<Action_ApplyAffliction>();
+
+            cookedAfflic.item = sgfto.item;
 
             cookedAfflic.OnCastFinished = true;
 
@@ -227,19 +258,31 @@ public partial class Plugin : BaseUnityPlugin
                 });
 
 
-                var tourte = peakBundle.LoadAsset<GameObject>("Tourtiere.prefab");
+            var tourte = peakBundle.LoadAsset<GameObject>("Tourtiere.prefab");
 
-                tourte.AddComponent<CookingHungerController>();
-                
-                if (tourte.TryGetComponent(out Item it))
-                {
-                    it.carryWeight = 2;
-                }
-                
+
+
+            tourte.GetOrAddComponent<PhotonCleanupHelper>();
+            
+            var tto = tourte.GetOrAddComponent<ItemOptimizer>();
+            tto.item = tourte.GetComponent<Item>();
+
+
+            tto.item.overrideJetpackFuel = true;
+            tto.item.overrideJetpackFuelAmount = 10;
+            tto.item.overrideJetpackFuelPerUse = 20;
+            tto.item.overrideJetpackFuelPerFuelMult = 1;
+
+            tourte.AddComponent<CookingHungerController>();
+
+            if (tourte.TryGetComponent(out Item it))
+            {
+                it.carryWeight = 2;
+            }
+
             // If it's the holiday season, let's make the tourtière spawn anywhere
             if (IsHoliday)
             {
-
                 var ld = tourte.GetComponent<LootData>();
 
                 var baseRarity = ld.Rarity;
@@ -258,9 +301,9 @@ public partial class Plugin : BaseUnityPlugin
                 });
 
                 var sfld = sugarFudge.GetComponent<LootData>();
-                
+
                 var sfldRar = sfld.Rarity;
-                
+
                 sfld.rarityOverrides =
                 [
                     new ItemRarityOverride()
@@ -276,37 +319,70 @@ public partial class Plugin : BaseUnityPlugin
                 ];
 
                 sfld.Rarity = sfldRar - 1;
-
             }
 
 
             var pawc = peakBundle.LoadAsset<GameObject>("Paw Cakes.prefab");
 
+            pawc.GetOrAddComponent<PhotonCleanupHelper>();
+            var pcto = pawc.GetOrAddComponent<ItemOptimizer>();
+            pcto.item = pawc.GetComponent<Item>();
+
             pawc.AddComponent<CookingHungerController>();
-            
+
             var maplCookies = peakBundle.LoadAsset<GameObject>("MapleCookies.prefab");
 
-            maplCookies.AddComponent<CookingHungerController>();
+            maplCookies.GetOrAddComponent<PhotonCleanupHelper>();
+            var mcto = maplCookies.GetOrAddComponent<ItemOptimizer>();
+            mcto.item = maplCookies.GetComponent<Item>();
             
+            mcto.item.overrideJetpackFuel = true;
+            mcto.item.overrideJetpackFuelAmount = 10;
+            mcto.item.overrideJetpackFuelPerUse = 20;
+            mcto.item.overrideJetpackFuelPerFuelMult = 1;
+
+            maplCookies.AddComponent<CookingHungerController>();
+
             var pout = peakBundle.LoadAsset<GameObject>("Airplane Poutine.prefab");
 
+            pout.GetOrAddComponent<PhotonCleanupHelper>();
+            var ptto = pout.GetOrAddComponent<ItemOptimizer>();
+            ptto.item = pout.GetComponent<Item>();
+
             pout.AddComponent<CookingHungerController>();
-            
+
             var spruceBeer = peakBundle.LoadAsset<GameObject>("SpruceBeer.prefab");
 
+            spruceBeer.GetOrAddComponent<PhotonCleanupHelper>();
+            var sbto = spruceBeer.GetOrAddComponent<ItemOptimizer>();
+            sbto.item = spruceBeer.GetComponent<Item>();
+
             spruceBeer.AddComponent<CookingHungerController>();
-            
+
             var sbic = spruceBeer.GetOrAddComponent<ItemCooking>();
 
             var beerPop = spruceBeer.GetOrAddComponent<ActionSpawnOnFirstUse>();
 
-            var normalPop = spruceBeer.GetComponent<Action_Spawn>();
+            beerPop.item = sbto.item;
             
+            var normalPop = spruceBeer.GetComponent<Action_Spawn>();
+
+            // Get the energy drink pop instead
+
+            if (ItemDatabase.TryGetItem(27, out var sodapop) && sodapop.TryGetComponent(out Action_Spawn sp))
+            {
+                normalPop.objectToSpawn = sp.objectToSpawn;
+            }
+
             beerPop.objectToSpawn = normalPop.objectToSpawn;
             beerPop.OnCastFinished = true;
 
+            beerPop.spawnPoint = normalPop.spawnPoint;
+            beerPop.item = normalPop.item;
+
             normalPop.enabled = false;
             beerPop.enabled = false;
+
             Destroy(normalPop);
 
             sbic.additionalCookingBehaviors = sbic.additionalCookingBehaviors.AddToArray(
@@ -315,7 +391,13 @@ public partial class Plugin : BaseUnityPlugin
                     cookedAmountToTrigger = 1,
                     scriptsToEnable = [beerPop]
                 });
+
+            var toffee = peakBundle.LoadAsset<GameObject>("MapleToffee.prefab");
+
+            toffee.GetOrAddComponent<PhotonCleanupHelper>();
             
+            var mtto = toffee.GetOrAddComponent<ItemOptimizer>();
+            mtto.item = toffee.GetComponent<Item>();
 
             /*
 
@@ -326,7 +408,7 @@ public partial class Plugin : BaseUnityPlugin
             peakBundle.Mod.RegisterContent();
 
             HighJumpEffectPrefab = peakBundle.LoadAsset<GameObject>("VFX_Screen_HighJump.prefab");
-            
+
             Log.LogInfo("Snacks items are loaded!");
         });
 
@@ -355,8 +437,19 @@ public partial class Plugin : BaseUnityPlugin
                 {
                     // Also fix colorblinds material while we're at it...
                     FixColorblindMaterials(bub);
+
+                    var bto = bub.GetOrAddComponent<ItemOptimizer>();
+                    
+                    bto.item = bub.GetComponent<Item>();
+                    
+                    bub.GetOrAddComponent<PhotonCleanupHelper>();
                     
                     bub.AddComponent<CookingHungerController>();
+
+                   bto.item.overrideJetpackFuel = true;
+                   bto.item.overrideJetpackFuelAmount = 0;
+                   bto.item.overrideJetpackFuelPerUse = Mathf.RoundToInt(25/3f);
+                   bto.item.overrideJetpackFuelPerFuelMult = 1;
 
                     foreach (Renderer renderer in bub.GetComponentsInChildren<Renderer>())
                     {
@@ -398,13 +491,12 @@ public partial class Plugin : BaseUnityPlugin
             }
 
             peakBundle.Mod.RegisterContent();
-            
+
             Log.LogInfo("Fruits items are loaded!");
-            
         });
 
         LoadAllCustomAfflictions();
-        
+
         MonoDetourManager.InvokeHookInitializers(typeof(Plugin).Assembly);
         new Harmony(Id).PatchAll(typeof(CuisineCharacterPatcher));
 
@@ -414,7 +506,7 @@ public partial class Plugin : BaseUnityPlugin
     private void LoadAllCustomAfflictions()
     {
         var modDefinition = ModDefinition.GetOrCreate(Info);
-        
+
         CuisineAfflictionManager.RegisterAfflictions(new AfflictionDefinition()
         {
             Name = CuisineAfflictionValues.HIGH_JUMP_NAME
@@ -448,7 +540,7 @@ public partial class Plugin : BaseUnityPlugin
             }
 
             currentLine++;
-            
+
             var valList = new List<string>(CSVReader.SplitCsvLine(line));
 
             var locName = valList.Deque();

@@ -46,10 +46,11 @@ public class CuisineCharacterAfflictions : MonoBehaviourPunCallbacks
         float staminaCostMult = 1f;
         float jumpMult = 1f;
         Vector3 jumpDir = Vector3.up;
+
         if (isPalJump)
         {
             staminaCostMult = 0f;
-            jumpMult = 2f;
+            ++jumpMult;
             m_character.data.sincePalJump = 0f;
             jumpDir += m_character.data.lookDirection_Flat * 0.25f;
             foreach (var sfxInstance in m_characterMovement.boostPlayer)
@@ -58,20 +59,35 @@ public class CuisineCharacterAfflictions : MonoBehaviourPunCallbacks
             }
         }
 
-        m_character.data.jumpsRemaining--;
+        var doubleJump = false;
+
+        if (m_character.data.jumpsRemaining > 0)
+        {
+            --m_character.data.jumpsRemaining;
+        }
+        else if (m_character.data.extraJumps > 0)
+        {
+            doubleJump = true;
+            --m_character.data.extraJumps;
+        }
+
         m_character.data.isCrouching = false;
         m_character.data.chargingJump = true;
+
+        if (doubleJump && !isPalJump)
+            ++jumpMult;
+
         m_character.OnStartJump();
         StartCoroutine(IDoJump());
+        GlobalEvents.TriggerCharacterJumped(m_character, doubleJump);
+
 
         // ReSharper disable once InconsistentNaming
         IEnumerator IDoJump()
         {
             _ = jumpImpulse;
-            if (!m_character.OutOfStamina())
-            {
-                m_character.refs.afflictions.SubtractStatus(CharacterAfflictions.STATUSTYPE.Web, 0.05f, fromRPC: true);
-            }
+            m_character.refs.afflictions.SubtractStatus(CharacterAfflictions.STATUSTYPE.Web, 0.05f, true);
+            m_character.refs.afflictions.SubtractStatus(CharacterAfflictions.STATUSTYPE.FlyTrap, 0.03f, true);
 
             float c = 0f;
             while (c < 0.1f)
@@ -85,18 +101,21 @@ public class CuisineCharacterAfflictions : MonoBehaviourPunCallbacks
             m_character.OnJump();
             m_character.data.chargingJump = false;
             m_character.data.isJumping = true;
-            bool flag = m_character.GetTotalStamina() > m_characterMovement.jumpStaminaUsageSprinting &&
-                        m_character.input.sprintIsPressed;
 
-            m_character.data.sprintJump = flag;
             m_character.UseStamina(
-                (flag ? m_characterMovement.jumpStaminaUsageSprinting : m_characterMovement.jumpStaminaUsage) *
-                staminaCostMult, flag);
-            foreach (var part in m_character.refs.ragdoll.partList)
+                (!m_characterMovement.sprintAnimationDisabled && m_character.data.isSprinting
+                    ? m_characterMovement.jumpStaminaUsageSprinting
+                    : m_characterMovement.jumpStaminaUsage) * staminaCostMult, false);
+
+            if (!m_character.refs.afflictions.isStruggling)
             {
-                // We override the jump impulse to use the boosting impulse. This way, boosting another player while in high jump gives an even bigger boost
-                part.AddForce(jumpDir * (jumpImpulse * jumpMult * m_characterMovement.balloonJumpMultiplier),
-                    ForceMode.Acceleration);
+                foreach (var part in m_character.refs.ragdoll.partList)
+                {
+                    // We override the jump impulse to use the boosting impulse. This way, boosting another player while in high jump gives an even bigger boost
+                    part.AddForce(jumpDir * (jumpImpulse * jumpMult * m_characterMovement.balloonJumpMultiplier *
+                                             m_characterMovement.waterJumpModifier),
+                        ForceMode.Acceleration);
+                }
             }
         }
     }

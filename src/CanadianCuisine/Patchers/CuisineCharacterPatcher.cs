@@ -8,7 +8,7 @@ namespace CanadianCuisine.Patchers;
 
 public class CuisineCharacterPatcher
 {
-    [HarmonyPatch(typeof(CharacterAfflictions), "Awake")]
+    [HarmonyPatch(typeof(CharacterAfflictions), nameof(CharacterAfflictions.Awake))]
     [HarmonyPostfix]
     public static void AfflictionAwakePostfix(CharacterAfflictions __instance)
     {
@@ -20,7 +20,7 @@ public class CuisineCharacterPatcher
         }
     }
 
-    [HarmonyPatch(typeof(GUIManager), "Awake")]
+    [HarmonyPatch(typeof(GUIManager),  nameof(GUIManager.Awake))]
     [HarmonyPostfix]
     public static void GUIAwakePostfix(GUIManager __instance)
     {
@@ -43,7 +43,7 @@ public class CuisineCharacterPatcher
         }
     }
 
-    [HarmonyPatch(typeof(CharacterMovement), "CheckForPalJump")]
+    [HarmonyPatch(typeof(CharacterMovement), nameof(CharacterMovement.CheckForPalJump))]
     [HarmonyPrefix]
     public static void CheckForPalJumpPrefix(CharacterMovement __instance, Character c, ref bool __runOriginal)
     {
@@ -61,13 +61,14 @@ public class CuisineCharacterPatcher
                 if (__instance.character.refs.view.IsMine)
                 {
                     // This way we can call our custom High Jump RPC function that uses the character impulse as a base 
-                    __instance.character.refs.view.RPC("HighJumpRpc", RpcTarget.All, true, c.refs.movement.jumpImpulse);
+                    __instance.character.refs.view.RPC(nameof(CuisineCharacterAfflictions.HighJumpRpc), RpcTarget.All, true, c.refs.movement.jumpImpulse);
                 }
             }
         }
+        
     }
     
-    [HarmonyPatch(typeof(CharacterClimbing), "RPCA_ClimbJump")]
+    [HarmonyPatch(typeof(CharacterClimbing), nameof(CharacterClimbing.RPCA_ClimbJump))]
     [HarmonyPrefix]
     public static void RPCA_ClimbJumpPrefix(CharacterClimbing __instance, ref bool __runOriginal)
     {

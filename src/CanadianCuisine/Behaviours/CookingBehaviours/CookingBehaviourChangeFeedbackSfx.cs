@@ -10,7 +10,6 @@ public class CookingBehaviourChangeFeedbackSfx : AdditionalCookingBehavior
         {
             Plugin.Log.LogWarning("Cooking Behaviour will try to change to an empty sound effect name.");
         }
-
     }
 
     public override void TriggerBehaviour(int cookedAmount)
