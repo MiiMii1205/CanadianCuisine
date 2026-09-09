@@ -4,9 +4,7 @@ public class ActionSpawnOnFirstUse : Action_Spawn
 {
     public override void RunAction()
     {
-        var uses = item.GetData<OptionableIntItemData>(DataEntryKey.ItemUses);
-
-        if (!uses.HasData || uses.Value == (item.totalUses - 1))
+        if (!item.data.TryGetDataEntry<OptionableIntItemData>(DataEntryKey.ItemUses, out var uses) || uses.Value == (item.totalUses - 1))
         {
             base.RunAction();
         }

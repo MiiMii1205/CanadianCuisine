@@ -136,8 +136,8 @@
 
 - Added "The Final Ascent" support! 
 
-## [2.0.1] - 2026-08-27
+## [2.1.0] - 2026-08-27
 
-### Version 2.0.1
+### Version 2.1.0
 
 - Added item optimisations, custom jetpack fuel values to most items.

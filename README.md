@@ -2,6 +2,8 @@
 [![Thunderstore Version](https://img.shields.io/thunderstore/v/OracleTeam/CanadianCuisine?style=for-the-badge)](https://thunderstore.io/c/peak/p/OracleTeam/CanadianCuisine/)
 [![Thunderstore Version](https://img.shields.io/thunderstore/dt/OracleTeam/CanadianCuisine?style=for-the-badge)](https://thunderstore.io/c/peak/p/OracleTeam/CanadianCuisine/)
 [![Thunderstore Likes](https://img.shields.io/thunderstore/likes/OracleTeam/CanadianCuisine?style=for-the-badge)](https://thunderstore.io/c/peak/p/OracleTeam/CanadianCuisine/)
+[![GitHub Licences](https://img.shields.io/github/license/MiiMii1205/CanadianCuisine?style=for-the-badge)](https://github.com/MiiMii1205/CanadianCuisine)
+[![GitHub Issues](https://img.shields.io/github/issues-raw/MiiMii1205/CanadianCuisine?style=for-the-badge)](https://github.com/MiiMii1205/CanadianCuisine/issues/new)
 
 Adds French-Canadian dishes and snacks fatefully rendered within PEAK's art style.
 
