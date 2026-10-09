@@ -142,7 +142,7 @@
 
 - Added item optimisations, custom jetpack fuel values to most items.
 
-## [2.1.0] - 2026-08-27
+## [2.2.0] - 2026-10-08
 
 ### Version 2.2.0
 
