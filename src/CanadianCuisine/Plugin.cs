@@ -152,8 +152,7 @@ public partial class Plugin : BaseUnityPlugin
             prefab.AddComponent<CookingHungerController>();
 
             var papinoCookie = peakBundle.LoadAsset<GameObject>("PapinoCookies.prefab");
-
-
+            
             papinoCookie.GetOrAddComponent<PhotonCleanupHelper>();
             
             var papto = papinoCookie.GetOrAddComponent<ItemOptimizer>();
@@ -256,12 +255,9 @@ public partial class Plugin : BaseUnityPlugin
                     scriptsToEnable = [cookedAfflic],
                     cookedAmountToTrigger = 1
                 });
-
-
+            
             var tourte = peakBundle.LoadAsset<GameObject>("Tourtiere.prefab");
-
-
-
+            
             tourte.GetOrAddComponent<PhotonCleanupHelper>();
             
             var tto = tourte.GetOrAddComponent<ItemOptimizer>();
@@ -294,6 +290,8 @@ public partial class Plugin : BaseUnityPlugin
                     .AddFlag(SpawnPool.LuggageMesa)
                     .AddFlag(SpawnPool.LuggageRoots);
 
+                ld.rarityOverrides[0].Rarity = baseRarity - 1;
+                
                 ld.rarityOverrides.Add(new ItemRarityOverride()
                 {
                     Rarity = baseRarity - 1,
@@ -320,8 +318,7 @@ public partial class Plugin : BaseUnityPlugin
 
                 sfld.Rarity = sfldRar - 1;
             }
-
-
+            
             var pawc = peakBundle.LoadAsset<GameObject>("Paw Cakes.prefab");
 
             pawc.GetOrAddComponent<PhotonCleanupHelper>();
@@ -405,6 +402,25 @@ public partial class Plugin : BaseUnityPlugin
 
             toffee.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.AddComponent<MapleToffeeVariantController>();*/
 
+
+
+            var pdaddy = peakBundle.LoadAsset<GameObject>("PartyDaddies.prefab");
+
+            pdaddy.GetOrAddComponent<PhotonCleanupHelper>();
+            var pdadto = spruceBeer.GetOrAddComponent<ItemOptimizer>();
+            pdadto.item = spruceBeer.GetComponent<Item>();
+
+            var cookieG = pdaddy.GetOrAddComponent<ActionSpawnAndGrab>();
+
+            var pdadc = peakBundle.LoadAsset<GameObject>("PartyDaddy.prefab");
+
+            pdadc.GetOrAddComponent<PhotonCleanupHelper>();
+            var pdadcto = pdadc.GetOrAddComponent<ItemOptimizer>();
+            pdadcto.item = pdadc.GetComponent<Item>();
+            
+            cookieG.itemToSpawn = pdadcto.item;
+            cookieG.OnCastFinished = true;
+            
             peakBundle.Mod.RegisterContent();
 
             HighJumpEffectPrefab = peakBundle.LoadAsset<GameObject>("VFX_Screen_HighJump.prefab");
@@ -499,6 +515,7 @@ public partial class Plugin : BaseUnityPlugin
 
         MonoDetourManager.InvokeHookInitializers(typeof(Plugin).Assembly);
         new Harmony(Id).PatchAll(typeof(CuisineCharacterPatcher));
+        new Harmony(Id).PatchAll(typeof(CuisineGameUtilsPatcher));
 
         Log.LogInfo($"Plugin {Name} is loaded!");
     }

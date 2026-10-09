@@ -97,6 +97,23 @@ Maple leaf shaped cookies with a maple cream filling.
 
 - 4 mini lollipops at half the drowsiness.
 
+### Party Daddies ###
+
+<img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PartyDaddyBox.png?raw=true" height="256" width="256"/>
+
+Rarity
+: Mythic
+
+Location
+: Any luggage
+
+Tags
+: Packaged food
+
+Huge butter chocolate chip cookies with a huge slab of chocolate on top.
+
+- Deployable Thick Mints uses.
+
 ### Paw Cakes ###
 
 <img src="https://github.com/MiiMii1205/CanadianCuisine/blob/master/imgs/PawCake.png?raw=true" height="256" width="256"/>

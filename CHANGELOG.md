@@ -141,3 +141,13 @@
 ### Version 2.1.0
 
 - Added item optimisations, custom jetpack fuel values to most items.
+
+## [2.1.0] - 2026-08-27
+
+### Version 2.2.0
+
+- Added a brand new item: the Party Daddy box
+  - This is in essence deployable Thick Mints.
+  - When using the box, it gives you a single Party Daddy cookie that can be stored and eaten seperately later on.
+  - You can use it on another player to give them a party daddy cookie instead.
+- Fixed a bug that could have made cuisine's item spawn less often in GLOOM/THE CITADEL
